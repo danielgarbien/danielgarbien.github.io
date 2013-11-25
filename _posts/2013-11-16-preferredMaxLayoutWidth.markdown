@@ -57,4 +57,4 @@ This obviously won't work if a label is a subview of a table view cell. Cell's h
 Demo project on [github][demo_project].
 
 [objc_issue]: http://www.objc.io/issue-3/advanced-auto-layout-toolbox.html
-[demo_project]: http://www.objc.io/issue-3/advanced-auto-layout-toolbox.html
+[demo_project]: https://github.com/danielgarbien/PreferredMaxLayoutWidthDemo
