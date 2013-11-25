@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>preferredMaxLayoutWidth</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/colorful.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">iOS blog by Daniel Garbien</a></h1>
+          </div>
+
+          <h2>preferredMaxLayoutWidth</h2>
+<p class="meta">16 Nov 2013</p>
+
+<div class="post">
+<h2>The problem</h2>
+
+<p>We have a custom subclass of UIView with a multiline UILabel subview. Height of the view should extends dynamically to fit the label with its content. </p>
+
+<h2>The solution</h2>
+
+<p>Size of a UILabel is calculated by the system using a value specified as a preffered maximal width. From the Apple&#39;s documentation on a UILabel&#39;s preferredMaxLayoutWidth:</p>
+
+<blockquote>
+<p>This property affects the size of the label when layout constraints are applied to it. During layout, if the text extends beyond the width specified by this property, the additional text is flowed to one or more new lines, thereby increasing the height of the label</p>
+</blockquote>
+
+<p>But in times of Auto Layout it would be a sad thing to calculate the preferred width outside the world of constraints. Florian Kugler lends a helping hand with his article on <a href="http://www.objc.io/issue-3/advanced-auto-layout-toolbox.html">objc.io</a>. In short: he suggests to let the Auto Layout do its work and use the resulting frame to update the preferred maximum width.  </p>
+
+<p>It turns out that there is an undocumented feature in iOS 7 that makes the calculations for us. This means that on the newest system the Florian&#39;s trick is not needed anymore! We should use it only if necessary.</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">layoutSubviews</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">NSFoundationVersionNumber_iOS_6_1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">[</span><span class="n">super</span> <span class="n">layoutSubviews</span><span class="p">];</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">label</span><span class="p">.</span><span class="n">preferredMaxLayoutWidth</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">label</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">[</span><span class="n">super</span> <span class="n">layoutSubviews</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>For our custom view to extend together with a label we only need to set up right constraints. Label&#39;s top should stick to the top of the view and label&#39;s bottom to the bottom.</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="n">NSNumber</span> <span class="o">*</span> <span class="n">padding</span> <span class="o">=</span> <span class="p">@(</span><span class="mi">4</span><span class="p">);</span>
+<span class="n">NSDictionary</span> <span class="o">*</span> <span class="n">metrics</span> <span class="o">=</span> <span class="n">NSDictionaryOfVariableBindings</span><span class="p">(</span><span class="n">padding</span><span class="p">);</span>
+<span class="n">NSDictionary</span> <span class="o">*</span> <span class="n">views</span> <span class="o">=</span> <span class="n">NSDictionaryOfVariableBindings</span><span class="p">(</span><span class="n">_label</span><span class="p">);</span>
+<span class="p">[</span><span class="n">self</span> <span class="n">addConstraints</span><span class="o">:</span><span class="p">[</span><span class="n">NSLayoutConstraint</span> <span class="n">constraintsWithVisualFormat</span><span class="o">:</span><span class="s">@&quot;H:|-padding-[_label]-padding-|&quot;</span>
+                                                             <span class="nl">options:</span><span class="mi">0</span>
+                                                             <span class="nl">metrics:</span><span class="n">metrics</span>
+                                                               <span class="nl">views:</span><span class="n">views</span><span class="p">]];</span>
+<span class="p">[</span><span class="n">self</span> <span class="n">addConstraints</span><span class="o">:</span><span class="p">[</span><span class="n">NSLayoutConstraint</span> <span class="n">constraintsWithVisualFormat</span><span class="o">:</span><span class="s">@&quot;V:|-padding-[_label]-padding-|&quot;</span>
+                                                             <span class="nl">options:</span><span class="mi">0</span>
+                                                             <span class="nl">metrics:</span><span class="n">metrics</span>
+                                                               <span class="nl">views:</span><span class="n">views</span><span class="p">]];</span>
+</code></pre></div>
+<p>Remember that the view itself shall NOT have a height constraint.</p>
+
+<h2>UITableViewCell</h2>
+
+<p>This obviously won&#39;t work if a label is a subview of a table view cell. Cell&#39;s height is explicitly defined by the return of the UITableViewDelegate&#39;s method tableView:heightForRowAtIndexPath:. In case you&#39;d like to calculate the cell&#39;s height based on dynamic text remember about two things (at least).  </p>
+
+<ul>
+<li><p>The final height reserved for your cell&#39;s view is the result of heightForRowAtIndexPath decreased by the height of the table view separator. In example if the heightForRowAtIndexPath=40 and tableView.separatorStyle is set to UITableViewCellSeparatorStyleSingleLine then the cell&#39;s height=39.5 </p></li>
+<li><p>NSString instance method sizeWithFont:constrainedToSize: returns an exact size on iOS 7, while on iOS 6 the result is rounded. It might have an impact on your layout. </p></li>
+</ul>
+
+<p>Demo project on <a href="http://www.objc.io/issue-3/advanced-auto-layout-toolbox.html">github</a>.</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Get in touch<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="mailto:danielgarbien@gmail.com">danielgarbien@gmail.com</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+
+    </body>
+</html>
