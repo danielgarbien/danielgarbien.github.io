@@ -17,7 +17,7 @@ Size of a UILabel is calculated by the system using the value specified as a pre
 
 But in times of Auto Layout it would be a sad thing to calculate the preferred width outside the world of constraints. Florian Kugler lends a helping hand with his article on [objc.io][objc_issue]. In short: he suggests to let the Auto Layout do its work and use the resulting frame to update the preferred maximum width.  
 
-It turns out that there is an undocumented feature in iOS 7 that makes the calculations for us. This means that on the newest system the Florian's trick is not needed anymore! We should use it only if necessary.
+It turns out that there is an undocumented feature in iOS 7 that makes the calculations for us. This means that the Florian's trick is not needed anymore! We should use it only if necessary.
    
 ``` objc
 - (void)layoutSubviews
