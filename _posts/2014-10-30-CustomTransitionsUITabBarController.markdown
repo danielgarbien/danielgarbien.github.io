@@ -7,7 +7,7 @@ categories: ios
 
 ## The idea
 
-Building your own container from scratch to support custom animations takes a lot of nerve. It would also be pity no disregard transitioning API available from iOS 7. Still, in order to use the (not so) new API you have a choice to go with your own custom containment that supports it ([painfull][objc_issue]) or go easy on yourself and use one of framework's containments.
+Building your own container from scratch to support custom animations takes a lot of nerve. It would also be a pity to disregard transitioning API available from iOS 7. Still, in order to use the (not so) new API you have a choice to go with your own custom containment that supports it ([painfull][objc_issue]) or go easy on yourself and use one of framework's containments.
 Scenario I've faced required retaining all of child view controllers. My choice was UITabBarController.
 
 ## Implementation
