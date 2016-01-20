@@ -33,7 +33,7 @@ function startAt(x)
 &nbsp;&nbsp;&nbsp;&nbsp;this figure of speach?  
 **a:** ?  
 **d:** a synecdoche  
-&nbsp;&nbsp;&nbsp;&nbsp;[Synecdoche, San Francisco][synecdoche] (9/10)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Synecdoche, San Francisco][synecdoche]    
 
 [synecdoche]: http://www.imdb.com/title/tt0383028/
 [closure]: https://en.wikipedia.org/wiki/Closure_(computer_programming)
