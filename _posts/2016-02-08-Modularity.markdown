@@ -29,7 +29,8 @@ We can achieve it by placing module files in separate groups/folders. This kind 
 
 ## Controlling the flow
 
-Wireframe instance is the guy in charge (see [Viper architecture][viper]). It is not a UIViewController itself, but it manages interactions between suburdinate controllers. It is usually their delegate. On top of that a main wireframe handles loading a root view controller in a window.
+MainWireframe instance is the guy in charge (see [Viper architecture][viper]). It is not a UIViewController itself, but it manages interactions between suburdinate controllers. It is usually their delegate. <s>On top of that a main wireframe handles loading a root view controller in a window.</s>   
+More on the Wireframe concept in upcoming post. In the meantime check demo project on [github][github] for a sample implementation.
 
 ## Launching modules on their own
 
@@ -45,7 +46,7 @@ if (LaunchModule.currentProcessLaunchModule() != nil){
 
 This special condition is a "launchModule" environmental variable added to the scheme. Below you see how easy it is to switch between running an entire project/single module alone and vice versa!
 
-<img src="https://cloud.githubusercontent.com/assets/3668771/12930465/c1c550e4-cf78-11e5-9ee2-e7dc8233b410.png" alt="Environment variable" style="width: 600px;"/>
+<img src="https://cloud.githubusercontent.com/assets/3668771/13236892/ce5b14a2-d9c7-11e5-9405-2b90df9f0a75.png" alt="Environment variable" style="width: 600px;"/>
 
 Anticipated values are defined in LaunchModule.swift:
 
@@ -54,8 +55,8 @@ Anticipated values are defined in LaunchModule.swift:
 private let launchModuleEnvironmentVariableName = "launchModule"
 /// Launch module expected environment value names
 enum LaunchModule: String {
-    case Master = "master"
-    case Detail = "detail"
+    case Master
+    case Detail
 }
 ``` 
 
@@ -123,5 +124,5 @@ Demo project on [github][github].
 [otto]: http://dev.otto.de/2015/09/30/on-monoliths-and-microservices/
 [apple]: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AccessControl.html
 [viper]: https://www.objc.io/issues/13-architecture/viper/
-[groups]: https://cloud.githubusercontent.com/assets/3668771/12929088/45cd2446-cf71-11e5-8a5b-1464d531a5cc.png
+[groups]: https://cloud.githubusercontent.com/assets/3668771/13237038/d59af6dc-d9c8-11e5-9b33-113cdbc2ba4c.png
 [github]: https://github.com/danielgarbien/Modularity
