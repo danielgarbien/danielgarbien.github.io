@@ -33,7 +33,9 @@ It turns out fetched results controllers are shortly retained by Notification Ce
 
 ## Solution
 
-Simply niling out FRC's delegate in DetailsViewController deinit would solve the issue, but we would have to remember about if in every place NSFetchedResultsController is used. Instead I came up with SafeFetchedResultsController. It overrides delegate property to back it up with weak property.
+Simply niling out FRC's delegate in DetailsViewController deinit would solve the issue, but we would have to remember about if in every place NSFetchedResultsController is used. Instead I came up with SafeFetchedResultsController. It overrides delegate property to back it up with weak property. 
+
+When we replace NSFetchedResultsController with SafeFetchedResultsController objects objc_msgSend that before was causing a crash now simply does nothing by sending a message to nil object.
 
 ``` swift   
 class SafeFetchedResultsController: NSFetchedResultsController {
