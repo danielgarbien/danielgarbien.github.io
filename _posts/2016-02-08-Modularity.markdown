@@ -114,7 +114,8 @@ extension LaunchModule {
     }
 }
 ```
-&nbsp;
+
+
 ## Voilà
 
 There, we did it! Each module is not aware of others, nor about the flow. It's runnable and compatible with automated tests.
