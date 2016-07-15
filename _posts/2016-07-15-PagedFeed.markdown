@@ -47,7 +47,6 @@ Extension serves you with a practical URL request creator.
 
 ``` swift
 extension Resource {
-    
     func requestWithBaseURL(baseURL: NSURL) -> NSURLRequest {
         let URL = baseURL.URLByAppendingPathComponent(path ?? "")
         let components = NSURLComponents(URL: URL, resolvingAgainstBaseURL: false)!
@@ -61,11 +60,11 @@ extension Resource {
 }
 ```
 
-With this form resources are very easy to use by Synchronizer.
+In this form resources are very easy to be used by Synchronizer.
 
 ## Network Layer - Caching
 
-One hour long caching is achieved with NSURLCache. It might look like a no go when URL responses come with no Cache-Control headers (which is a case in GitHub API). The solution was to implement NSURLSessionDelegate that injects Cache-Control headers into responses headers before they are cached (see full [gist][gistSessionDelegate]):
+One hour long caching is achieved with NSURLCache. It might look like a no go when URL responses come with no Cache-Control headers (which is a case in GitHub API). The solution was to implement NSURLSessionDelegate that injects Cache-Control headers into responses headers before they are cached.
 
 ``` swift
 func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, willCacheResponse proposedResponse: NSCachedURLResponse, completionHandler: (NSCachedURLResponse?) -> Void) {
@@ -89,6 +88,8 @@ func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, willCache
 }
 ```
 
+See full [gist][gistSessionDelegate]).
+
 ## Data Access Layer
 
 Abstracts network away from Controllers. Additionally it goes all the way to meet pagination. To that end it introduces:
@@ -111,7 +112,6 @@ enum FeedResult<Page> {
 ``` swift
 // Initialize
 lazy var loadingStateMachine: LoadingFeedStateMachine<User> = LoadingFeedStateMachine(stateDidChange: self.handleLoadingStateChange)
-
 // Launch
 loadingStateMachine.startFeed { completion in
     dataAccess.usersWithQuery(
@@ -120,7 +120,6 @@ loadingStateMachine.startFeed { completion in
         pageSize: 30,
         completion: completion)
 }
-
 // Handle changes
 private func handleLoadingStateChange(state: LoadingFeedState<[User]>) {
     switch state {
@@ -129,7 +128,6 @@ private func handleLoadingStateChange(state: LoadingFeedState<[User]>) {
     default: break
     }
 }
-
 // Trigger next load (when user scrolls to bottom)
 loadingStateMachine.next()
 ```
