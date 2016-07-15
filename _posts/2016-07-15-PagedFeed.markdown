@@ -88,7 +88,7 @@ func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, willCache
 }
 ```
 
-See full [gist][gistSessionDelegate]).
+See full [gist][gistSessionDelegate].
 
 ## Data Access Layer
 
