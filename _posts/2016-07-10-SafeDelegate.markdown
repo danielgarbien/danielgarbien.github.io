@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Secure unowned(unsafe) var delegate"
+title:  "unowned(unsafe) var delegate"
 date:   2016-07-11 19:39:07
 categories: ios
 ---
