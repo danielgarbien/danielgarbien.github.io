@@ -13,19 +13,21 @@ A simple variation on feed with pagination in iOS app. If you'll pardon ascetic 
 
 ## Layers
 
-Project is split into 5 groups: model and 4 layers. 
+Project is split into 5 groups: Model, 3 actual layers and App. 
 
 <img width="300" alt="screen shot 2016-07-15 at 02 04 10" src="https://cloud.githubusercontent.com/assets/3668771/16859610/8c3ccdf2-4a30-11e6-92a6-9c7486a2028c.png">
 
 Model is super simple and has no business logic to it. It's designed to reflect data. Period. As such it flows from Top layer down to be visualized in UI. (Currently it's unidirectional, there are no write actions.)
 
-Next, we have 4 layers. No layer is aware of any layer below (Network Layer doesn't know about Data Access Layer etc.). On the other hand each layer only knows and talks to a layer that's directly above him (Controllers talk to Data Access Layer, but have no idea about networking).
+Next, we have 3 layers. No layer is aware of any layer below (Network Layer doesn't know about Data Access Layer etc.). On the other hand each layer only knows and talks to a layer that's directly above him (Controllers talk to Data Access Layer, but have no idea about networking).
+
+App layer glues them together.
 
 This kind of design gives very solid division of responsibilities.
 
 ## Network Layer - Resource
 
-As defined with a protocol a single resource object:
+As defined with a protocol a single Resource object:
 
 * knows where to get it from (path) 
 * knows how to get it (parameters)
@@ -54,13 +56,12 @@ extension Resource {
         components.queryItems = parameters.map { key, value -> NSURLQueryItem in
             NSURLQueryItem(name: String(key), value: String(value))
         }
-        
         return NSURLRequest(URL: components.URL!)
     }
 }
 ```
 
-In this form resources are very easy to be used by Synchronizer.
+In this form resources are very easy to be used by the Synchronizer.
 
 ## Network Layer - Caching
 
@@ -88,7 +89,7 @@ func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, willCache
 }
 ```
 
-See full [gist][gistSessionDelegate].
+Get a gist [here][gistSessionDelegate].
 
 ## Data Access Layer
 
@@ -132,11 +133,15 @@ private func handleLoadingStateChange(state: LoadingFeedState<[User]>) {
 loadingStateMachine.next()
 ```
 
+Functional, isn't it?
+
 ## Controllers
 
 * Column layout implementation works very well with vertically scrolled content of different height items.
-* There is a simple collection view data source generic over Object and Cell types. See [gist][gistDataSource].
+* There is a Simple Collection View Data Source generic over Object and Cell types. ([gist][gistDataSource])
 * Items collection stack (view controller + data source) is generic over Item type. User model could be replaced with, let's say, Respository at any time.
+
+With this much of genericness classes with actual business logic are very concise and to the point (vide 40 line UsersCollectionViewController). It doesn't have to stop here. For instance Items collection stack could be made generic over Cell class. But this is another, never-ending story...
 
 ## App
 
