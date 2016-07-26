@@ -37,7 +37,7 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 # Site owner
 owner:
   name: Daniel Garbień
-  avatar: bio-photo.jpg
+  avatar: #photo
   email: me@danielgarbien.com
   disqus-shortname:
   twitter: danielgarbien
