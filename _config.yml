@@ -59,3 +59,9 @@ owner:
     ad-client:
     ad-slot:
   bing-verify:
+
+# Redirects
+custom_redirects:
+  - from: /
+    to: /blog
+    type: permanent
