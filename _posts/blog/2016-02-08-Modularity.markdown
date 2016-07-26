@@ -5,6 +5,7 @@ excerpt: "On independence in modular architecture and it's great testability"
 date:   2016-02-08 19:39:07
 categories: blog
 tags: [Swift, Architecture, Tests]
+share: true
 ---
 
 Too many times I was loosing sleep over unraveling biderectional dependencies between view controllers in an aged codebase. Greatly inspired by [On Monoliths and Microservices][otto] by Guido Steinacker paired with my own work experience I've decided to underline a modularity issue in iOS app. There is no such project kind that deos not grow and evolve. An urge to code pragmatic shortcuts turns out to be as much appealing as lethal at a (sooner than) later stage.
