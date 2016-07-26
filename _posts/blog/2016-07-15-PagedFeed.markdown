@@ -1,9 +1,13 @@
 ---
 layout: post
 title:  "Paged feed with UICollectionView by example"
-date:   2016-07-15 00:39:07
 categories: blog
-author: billy_rick
+excerpt:
+tags: [Swift]
+image:
+feature:
+date:   2016-07-15 00:39:07
+modified: 
 ---
 
 A simple variation on feed with pagination in iOS app. If you'll pardon ascetic aesthetics, it's just a proof of concept, shall you find some clever goodies in the [code][github]. Details below.
