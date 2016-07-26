@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Modularity in iOS apps"
+excerpt: "On independence in modular architecture and it's great testability"
 date:   2016-02-08 19:39:07
 categories: blog
 tags: [Swift, Architecture, Tests]

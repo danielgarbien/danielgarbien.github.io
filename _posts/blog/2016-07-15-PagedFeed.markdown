@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Paged feed with UICollectionView by example"
+title:  "Paged feed with UICollectionView"
 categories: blog
-excerpt:
+excerpt: "A sample project with searchable dynamic feed, networking and caching"
 tags: [Swift, Architecture]
 image:
   feature:

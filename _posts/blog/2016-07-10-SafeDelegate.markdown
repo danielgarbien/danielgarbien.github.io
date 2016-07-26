@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "unowned(unsafe) var delegate"
+excerpt: "Make Foundation safe again, protect yourself from EXC_BAD_ACCESS"
 date:   2016-07-11 19:39:07
 categories: blog
 tags: [Swift, Debugging]

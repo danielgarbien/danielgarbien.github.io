@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "A closure tale"
+excerpt: "Demistify closure vs anonymous function confusion"
 date:   2016-01-19 18:51:07
 categories: blog
 tags: [Swift]

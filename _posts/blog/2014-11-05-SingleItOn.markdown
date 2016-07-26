@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Turning class into singleton with a category"
+excerpt: "Runtime magic used to test code you don't own"
 date:   2014-11-05 12:23:07
 categories: blog
 tags: [Objective-C]

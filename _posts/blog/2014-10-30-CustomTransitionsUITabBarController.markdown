@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Custom transitions in UITabBarController"
+excerpt: "Use UIViewControllerAnimatedTransitioning and relatives to interactively transition between tabs"
 date:   2014-10-30 12:23:07
 categories: blog
 tags: [Objective-C, Animations]

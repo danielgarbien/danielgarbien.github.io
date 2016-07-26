@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "preferredMaxLayoutWidth"
+excerpt: "No more calculating text sizes, let UILabel do the job for you"
 date:   2013-11-16 12:23:07
 categories: blog
 tags: [Objective-C]
