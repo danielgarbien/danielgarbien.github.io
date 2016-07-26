@@ -6,6 +6,7 @@ description: Slick iOS developer
 logo: #site-logo.png
 search: true
 url: http://localhost:4000
+comments: true
 
 # Jekyll configuration
 
@@ -40,7 +41,7 @@ owner:
   name: Daniel Garbień
   avatar: #photo
   email: me@danielgarbien.com
-  disqus-shortname:
+  disqus-shortname: danielgarbien-com
   twitter: danielgarbien
   facebook: #username
   github: danielgarbien
