@@ -1,9 +1,9 @@
 # Site wide configuration
 
-title: Site Title
+title: Daniel Garbień
 locale: en_US
-description: Describe your website here.
-logo: site-logo.png
+description: Slick iOS developer
+logo: #site-logo.png
 search: true
 url: http://localhost:4000
 
