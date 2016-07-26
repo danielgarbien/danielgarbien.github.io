@@ -3,6 +3,7 @@ layout: post
 title:  "Turning class into singleton with a category"
 date:   2014-11-05 12:23:07
 categories: blog
+tags: [Objective-C]
 ---
 
 ## The idea

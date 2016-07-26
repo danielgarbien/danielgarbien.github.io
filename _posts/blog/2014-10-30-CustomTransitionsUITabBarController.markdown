@@ -3,6 +3,7 @@ layout: post
 title:  "Custom transitions in UITabBarController"
 date:   2014-10-30 12:23:07
 categories: blog
+tags: [Objective-C, Animations]
 ---
 
 ## The idea

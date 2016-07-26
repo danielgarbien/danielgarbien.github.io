@@ -3,6 +3,7 @@ layout: post
 title:  "A closure tale"
 date:   2016-01-19 18:51:07
 categories: blog
+tags: [Swift]
 ---
 
 

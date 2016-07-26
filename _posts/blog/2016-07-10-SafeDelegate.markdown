@@ -3,6 +3,7 @@ layout: post
 title:  "unowned(unsafe) var delegate"
 date:   2016-07-11 19:39:07
 categories: blog
+tags: [Swift, Debugging]
 ---
 
 During last [CocoaHeads][cocoaheads] meeting in Cracow I did a small live debugging session with a crowd. Together we debugged an interesting crash that's a side effect on some Foundation implementation details and has roots in a frightening unowned(unsafe) reference type.

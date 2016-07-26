@@ -3,7 +3,7 @@ layout: post
 title:  "Paged feed with UICollectionView by example"
 categories: blog
 excerpt:
-tags: [Swift]
+tags: [Swift, Architecture]
 image:
   feature:
 date:   2016-07-15 00:39:07

@@ -3,6 +3,7 @@ layout: post
 title:  "preferredMaxLayoutWidth"
 date:   2013-11-16 12:23:07
 categories: blog
+tags: [Objective-C]
 ---
 
 ## The problem
