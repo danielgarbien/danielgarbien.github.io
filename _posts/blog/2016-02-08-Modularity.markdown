@@ -28,7 +28,9 @@ Now let's work them one by one.
 
 We can achieve it by placing module files in separate groups/folders. This kind of "horizontal" grouping stands in opposition to more frequently met "vertical" grouping into Models/Views/Controllers. Mind the virtuality of this solution. It is only up to you to keep the separation clean.
 
-![Alt text][groups]
+<figure>
+    <img style="max-width:600px" src="/images/modularity_groups.png" alt="image">
+</figure>
 
 ## Controlling the flow
 
@@ -49,7 +51,9 @@ if (LaunchModule.currentProcessLaunchModule() != nil){
 
 This special condition is a "launchModule" environmental variable added to the scheme. Below you see how easy it is to switch between running an entire project/single module alone and vice versa!
 
-<img src="https://cloud.githubusercontent.com/assets/3668771/13236892/ce5b14a2-d9c7-11e5-9405-2b90df9f0a75.png" alt="Environment variable" style="width: 600px;"/>
+<figure>
+    <img src="/images/modularity_scheme.png" alt="image">
+</figure>
 
 Anticipated values are defined in LaunchModule.swift:
 
@@ -128,5 +132,4 @@ Demo project on [github][github].
 [otto]: http://dev.otto.de/2015/09/30/on-monoliths-and-microservices/
 [apple]: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AccessControl.html
 [viper]: https://www.objc.io/issues/13-architecture/viper/
-[groups]: https://cloud.githubusercontent.com/assets/3668771/13237038/d59af6dc-d9c8-11e5-9b33-113cdbc2ba4c.png
 [github]: https://github.com/danielgarbien/Modularity

@@ -14,7 +14,9 @@ During last [CocoaHeads][cocoaheads] meeting in Cracow I did a small live debugg
 
 Test application is a classic master-detail. On the left there is a table view that lists few people. When a person is selected from the master list Detail screen is presented on the right. Detail contains some basic info + another table view. All table views are populated by fetched results controllers. From Detail you can delete a person, which will cause an automatic update in the Master list.
 
-<img width="600" alt="app" src="https://cloud.githubusercontent.com/assets/3668771/16743340/1b174f7a-47ac-11e6-878e-350c38943836.png">
+<figure>
+    <img style="max-width:600px" src="/images/unowned.png" alt="image">
+</figure>
 
 ## EXC_BAD_ACCESS
 
@@ -22,7 +24,9 @@ If you get a [demo project][github], get back to Initial commit, run on iPad Pro
 
 Let's see what message was it.
 
-<img width="600" alt="msgsend" src="https://cloud.githubusercontent.com/assets/3668771/16744685/78d54710-47b2-11e6-9267-99459b598999.png">
+<figure>
+    <img style="max-width:600px" src="/images/unowned_crash.png" alt="image">
+</figure>
 
 "controllerWillChangeContent:" is a method in NSFetchedResultsControllerDelegate. It looks like an instance of NSFetchedResultsController outlived it's unowned(unsafe) delegate and tried to send it a message - thus causing a crash.
 
@@ -30,7 +34,9 @@ That's surprising since both FRC and it's delegate are held by DetailViewControl
 
 Let's find out with Instruments. When we look at lifecycle of a problematic FRC we can spot an unbalanced retain that's causing an issue.
 
-<img width="600" alt="foundationretain" src="https://cloud.githubusercontent.com/assets/3668771/16745689/461f7ef8-47b7-11e6-9049-69b6e523f505.png">
+<figure>
+    <img style="max-width:600px" src="/images/unowned_profile.png" alt="image">
+</figure>
 
 It turns out fetched results controllers are shortly retained by Notification Center for the time of posting Core Data related notifications. This retain is usually followed by an almost immediate release. If (in this short timeframe) FRC is to be released by the last object holding it, the actual deallocation is postponed until it's released by Notification Center. It means that for a moment we lose control over memory management. In this case it led to a crash. 
 

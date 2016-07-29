@@ -15,13 +15,17 @@ A simple variation on feed with pagination in iOS app. If you'll pardon ascetic 
 
 (App let you search GitHub users.)
 
-<img width="487" alt="appshot" src="https://cloud.githubusercontent.com/assets/3668771/16858457/3ff64878-4a27-11e6-96d6-df54bc34c733.png">
+<figure>
+    <img style="max-width:500px" src="/images/paged_feed.png" alt="image">
+</figure>
 
 ## Layers
 
 Project is split into 5 groups: Model, 3 actual layers and App. 
 
-<img width="300" alt="screen shot 2016-07-15 at 02 04 10" src="https://cloud.githubusercontent.com/assets/3668771/16859610/8c3ccdf2-4a30-11e6-92a6-9c7486a2028c.png">
+<figure>
+    <img style="max-width:300px" src="/images/paged_feed_xcode.png" alt="image">
+</figure>
 
 Model is super simple and has no business logic to it. It's designed to reflect data. Period. As such it flows from Top layer down to be visualized in UI. (Currently it's unidirectional, there are no write actions.)
 
