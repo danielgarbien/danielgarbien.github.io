@@ -5,7 +5,8 @@ locale: en_US
 description: Slick iOS developer
 logo: #site-logo.png
 search: true
-url: http://danielgarbien.com
+url: https://danielgarbien.com
+# url: http://127.0.0.1:4000
 comments: true
 
 # Jekyll configuration
@@ -33,7 +34,7 @@ kramdown:
 mathjax: true
 
 include: [".htaccess"]
-exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", ".less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md", "vendor"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", ".less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md", "vendor", "s3_website.yml"]
 
 
 # Site owner
