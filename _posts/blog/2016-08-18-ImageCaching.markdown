@@ -109,7 +109,9 @@ let cancelationBlock = imageSynchronizer.loadResource(ImageResource(URL: imageUR
 cancelationBlock()
 ```
 
-So where is my `setImageWithURL` method? Well, there is none yet. If you ain't scared of singletons you can easily come up with an extension on `UIImageView` that uses shared instance of image synchronizer. You could also take care of cancelling there when imageView goes off screen or internet connection is bad.
+So where is my `setImageWithURL` method? 
+
+Well, there is none yet. If you ain't scared of singletons you can easily come up with an extension on `UIImageView` that uses shared instance of image synchronizer. You could also take care of cancelling there when imageView goes off screen or internet connection is bad.
 
 # Conslusion
 
