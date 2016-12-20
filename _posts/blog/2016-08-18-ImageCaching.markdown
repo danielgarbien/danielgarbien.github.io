@@ -91,11 +91,11 @@ extension ImageResource: Resource {
 # Usage
 
 ```swift
-let hundredMB = 1024 * 1024
+let MB = 1024 * 1024
 let day: NSTimeInterval = 24 * 60 * 60
 
 // create caching image synchronizer
-let imageCache = NSURLCache(memoryCapacity: hundredMB, diskCapacity: hundredMB, diskPath: "images")
+let imageCache = NSURLCache(memoryCapacity: 100 * MB, diskCapacity: 100 * MB, diskPath: "images")
 let imageSynchronizer = Synchronizer(cacheTime: day, URLCache: imageCache)
 
 // load image into image view
