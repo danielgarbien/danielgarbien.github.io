@@ -7,7 +7,7 @@ tags: [Swift, Migration, Objective-C]
 image:
 feature:
 date:   2017-10-14 10:39:07
-modified: 
+modified:
 share: true
 ---
 
@@ -21,15 +21,17 @@ After you run the migrator, double check and confirm changes it performed you're
 
 # Swift 3 @objc inference
 
-Never heard of it? In short it lets you freely use all (convertible) Swift API from Objective-C. It converts entire API because it *assumes* you will need all of it. It is deprecated for explicitness, compiler performance and smaller executables. Read more in [the proposal][proposal]. 
+Never heard of it? In short it lets you freely use all (convertible) Swift API from Objective-C. It converts entire API because it *assumes* you will need all of it. It is deprecated for explicitness, compiler performance and smaller executables. Read more in [the proposal][proposal].
 
 Dropping it will make you annotate **every single** Swift declaration that is used in Objective-C code. This is huge for big codebases of mixed Swift and Objective-C.
 
-## Decrease of API discoverablity
+Say you have solved all the issues and project builds - great! Some time later you're in an .m file and you want to use Swift API that has not been `@objc` annotated yet. Just go there and annotate what's needed, right? Easy when you know what you're looking for.
 
-Say you have solved all the issues and project builds - great! Some time later you're in an .m file and you want to use Swift API that has not been `@objc` annotated yet. Just get there and annotate what's needed, right? Easy when you know what you're looking for. 
+**When editing Objective-C files Xcode autocompletion gives no hints on non-@objc Swift API.**
 
-**When editing Objective-C files Xcode autocompletion gives no hints on non-`@objc` Swift API (because it's simply not in a generated bridging header).**
+API discoverablity is something you don't want to loose. Especially in cooperative projects with more than just a few extensions. Xcode won't help you here because with @objc inference turned off non-@objc API is simply not included in a generated bridging header.
+
+So what should you do now?
 
 ## Workaround
 
@@ -39,7 +41,9 @@ Keep Default setting for release configurations to benefit from performance opti
 
 # Extra tip
 
-Use `@objcMembers` annotation on classes you wish their entire API available in Objective-C (not mentioned in [the official migration guide][migration]). 
+Use `@objcMembers` annotation on classes you wish their entire API available in Objective-C. No need to annotate every single method separately. This will save you tons of boilerplate noise!
+
+(No idea why it is not mentioned in [the official migration guide][migration].)
 
 [proposal]: https://github.com/apple/swift-evolution/blob/master/proposals/0160-objc-inference.md
 [migration]: https://swift.org/migration-guide-swift4/

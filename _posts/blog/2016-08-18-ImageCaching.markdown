@@ -5,9 +5,9 @@ categories: blog
 excerpt: "Native solution that's simple and robust"
 tags: [Swift, Networking, Caching]
 image:
-  feature:
+feature:
 date:   2016-08-18 10:39:07
-modified: 
+modified:
 share: true
 ---
 
@@ -27,13 +27,15 @@ imageView.setImageWithURL(imageURL)
 
 `NSURLSession` comes with caching abilities of `NSURLCache`. It will efficiently cache HTTP responses (accordingly to their Cache-Control headers) including those with images or any other media! Satisfaction guaranteed by Apple. No need to reinvent the wheel.
 
-In fact, one can make use of `NSURLCache` even when responses lack Cache-Control headers. Missing headers may be injected in response in `NSURLSessionDelegate` method  
+In fact, one can make use of `NSURLCache` even when responses lack Cache-Control headers. Missing headers may be injected in response in `NSURLSessionDelegate` method
 
-```swift 
-func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, willCacheResponse proposedResponse: NSCachedURLResponse, completionHandler: (NSCachedURLResponse?) -> Void)
+```swift
+func URLSession(session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: (CachedURLResponse?) -> Void)
 ```
 
 # Implementation
+
+_(March, 2018) Updated code samples and the demo project to use Swift 4._
 
 Here's a [gist][gist] with:
 
@@ -44,10 +46,10 @@ Here's a [gist][gist] with:
 
 ```swift
 protocol Resource {
-    func request() -> NSURLRequest
-    
-    associatedtype ParsedObject
-    var parse: (NSData) throws -> ParsedObject { get }
+func request() -> URLRequest
+
+associatedtype ParsedObject
+var parse: (Data) throws -> ParsedObject { get }
 }
 ```
 
@@ -55,9 +57,9 @@ protocol Resource {
 
 ```swift
 enum SynchronizerResult<Result> {
-    case Success(Result)
-    case NoData
-    case Error(ErrorType)
+case Success(Result)
+case NoData
+case Error(ErrorType)
 }
 ```
 
@@ -65,26 +67,26 @@ enum SynchronizerResult<Result> {
 
 ```swift
 typealias CancelLoading = () -> Void
-    
+
 func loadResource<R: Resource, Object where R.ParsedObject == Object>
-    (resource: R, completion: SynchronizerResult<Object> -> ()) -> CancelLoading
+(resource: R, completion: SynchronizerResult<Object> -> ()) -> CancelLoading
 ```
 
 In order to support images `ImageResource` is introduced. As simple as that:
 
 ```swift
 struct ImageResource {
-    let imageURL: NSURL
+let imageURL: URL
 }
 extension ImageResource: Resource {
-    func request() -> NSURLRequest {
-        return NSURLRequest(URL: imageURL)
-    }
-    var parse: (NSData) throws -> UIImage? {
-        return { data in
-            UIImage(data: data)
-        }
-    }
+func request() -> NSURLRequest {
+return URLRequest(URL: imageURL)
+}
+var parse: (Data) throws -> UIImage? {
+return { data in
+UIImage(data: data)
+}
+}
 }
 ```
 
@@ -92,24 +94,24 @@ extension ImageResource: Resource {
 
 ```swift
 let MB = 1024 * 1024
-let day: NSTimeInterval = 24 * 60 * 60
+let day: TimeInterval = 24 * 60 * 60
 
 // create caching image synchronizer
-let imageCache = NSURLCache(memoryCapacity: 100 * MB, diskCapacity: 100 * MB, diskPath: "images")
+let imageCache = URLCache(memoryCapacity: 100 * MB, diskCapacity: 100 * MB, diskPath: "images")
 let imageSynchronizer = Synchronizer(cacheTime: day, URLCache: imageCache)
 
 // load image into image view
 let cancelationBlock = imageSynchronizer.loadResource(ImageResource(URL: imageURL)) { (object) in
-    if case .Success(let image) = object {
-        imageView.image = image
-    }
+if case .Success(let image) = object {
+imageView.image = image
+}
 }
 
 // cancel loading when image view goes off screen
 cancelationBlock()
 ```
 
-So where is my `setImageWithURL` method? 
+So where is my `setImageWithURL` method?
 
 Well, there is none yet. If you ain't scared of singletons you can easily come up with an extension on `UIImageView` that uses shared instance of image synchronizer. You could also take care of cancelling there when imageView goes off screen or internet connection is bad.
 
@@ -119,11 +121,11 @@ The point is you cut loose a third party dependency. The solution presented here
 
 # Demo
 
-See it working in the project: [code][github]
+See it working in the project (Swift 4): [code][github]
 
 <figure>
-    <img src="/images/avatars.png" alt="image">
-</figure> 
+<img src="/images/avatars.png" alt="image">
+</figure>
 
 [github]: https://github.com/danielgarbien/PagedFeed
 [gistSessionDelegate]: https://gist.github.com/danielgarbien/8e904b07c07110a502b3116576afaa64
