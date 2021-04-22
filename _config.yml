@@ -7,7 +7,6 @@ logo: #site-logo.png
 search: true
 url: https://danielgarbien.com
 # url: http://127.0.0.1:4000
-comments: true
 
 # Jekyll configuration
 
@@ -42,7 +41,7 @@ owner:
   name: Daniel Garbień
   avatar: #photo
   email: me@danielgarbien.com
-  disqus-shortname: danielgarbien-com
+  disqus-shortname:
   twitter: danielgarbien
   facebook: #username
   github: danielgarbien
