@@ -8,7 +8,6 @@ image:
   feature:
 date:   2016-07-15 00:39:07
 modified: 
-share: true
 ---
 
 A simple variation on feed with pagination in iOS app. If you'll pardon ascetic aesthetics, it's just a proof of concept, shall you find some clever goodies in the [code][github]. Details below.
