@@ -5,7 +5,6 @@ excerpt: "Use UIViewControllerAnimatedTransitioning and relatives to interactive
 date:   2014-10-30 12:23:07
 categories: blog
 tags: [Objective-C, Animations]
-share: true
 ---
 
 ## The idea

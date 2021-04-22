@@ -8,7 +8,6 @@ image:
 feature:
 date:   2016-08-18 10:39:07
 modified:
-share: true
 ---
 
 # Presenting images from the internet is hard

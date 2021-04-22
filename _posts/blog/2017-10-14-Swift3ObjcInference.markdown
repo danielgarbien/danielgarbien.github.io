@@ -8,7 +8,6 @@ image:
 feature:
 date:   2017-10-14 10:39:07
 modified:
-share: true
 ---
 
 # Migration is easy

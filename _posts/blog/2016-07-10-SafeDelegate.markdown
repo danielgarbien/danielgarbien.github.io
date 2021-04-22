@@ -5,7 +5,6 @@ excerpt: "Make Foundation safe again, protect yourself from EXC_BAD_ACCESS"
 date:   2016-07-11 19:39:07
 categories: blog
 tags: [Swift, Debugging]
-share: true
 ---
 
 During last [CocoaHeads][cocoaheads] meeting in Cracow I did a small live debugging session with a crowd. Together we debugged an interesting crash that's a side effect on some Foundation implementation details and has roots in a frightening unowned(unsafe) reference type.
